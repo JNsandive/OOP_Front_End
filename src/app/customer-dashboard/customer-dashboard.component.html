@@ -1,11 +1,38 @@
-<nav class="navbar navbar-dark bg-dark">
-  <!-- Navbar content -->
-</nav>
+<body>
+<ul class="nav-bar">
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+  <li class="icon-right">
+    <mat-icon class="custom-icon" style="color: white;">settings</mat-icon>
+  </li>
+</ul>
 
-<nav class="navbar navbar-dark bg-primary">
-  <!-- Navbar content -->
-</nav>
+<div class="main-content">
+  <div class="fixed-buy-section">
+    <p class="buy-text">Buy your tickets the way that you need!</p>
+    <button (click)="buyTickets()" [disabled]="selectedTicketIds.length === 0" class="buy-button">
+      Buy Selected Tickets
+    </button>
+  </div>
 
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <!-- Navbar content -->
-</nav>
+  <div class="ticket-container">
+    <div *ngFor="let ticket of tickets"
+         class="ticket-card"
+         [ngClass]="{
+             'available': ticket.available && !ticket.selected,
+             'unavailable': !ticket.available,
+             'selected': ticket.selected
+           }"
+         (click)="selectTicket(ticket)"
+         [style.pointerEvents]="!ticket.available ? 'none' : 'auto'">
+      <p>{{ ticket.name }}</p>
+      <p>{{ ticket.price | currency }}</p>
+      <p *ngIf="ticket.available && !ticket.selected" class="status">Available</p>
+      <p *ngIf="ticket.selected" class="status">Selected</p>
+      <p *ngIf="!ticket.available" class="status">Unavailable</p>
+    </div>
+  </div>
+</div>
+</body>
