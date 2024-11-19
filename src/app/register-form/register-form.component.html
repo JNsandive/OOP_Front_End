@@ -1,0 +1,166 @@
+<mat-tab-group>
+  <mat-tab label="Consumer Registration">
+
+    <section class="container">
+      <header>Customer Registration Form</header>
+      <form [formGroup]="registerFormConsumer" (ngSubmit)="onSubmit()" class="form">
+        <div class="input-box">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" placeholder="Enter first name" required/>
+          <small *ngIf="registerFormConsumer.get('firstName')?.invalid && registerFormConsumer.get('firstName')?.touched"
+                 class="error-message">
+            First name is required and must be at least 2 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" placeholder="Enter last name" required/>
+          <small *ngIf="registerFormConsumer.get('lastName')?.invalid && registerFormConsumer.get('lastName')?.touched"
+                 class="error-message">
+            Last name is required and must be at least 2 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="Enter email address" required/>
+          <small *ngIf="registerFormConsumer.get('email')?.invalid && registerFormConsumer.get('email')?.touched" class="error-message">
+            Please enter a valid email address.
+          </small>
+        </div>
+
+        <div class="type">
+          <div class="input-box">
+            <label>Phone Number</label>
+            <input type="text" formControlName="phoneNumber" placeholder="Enter your number" required/>
+            <span class="error-message"
+                  *ngIf="registerFormConsumer.get('phoneNumber')?.invalid && registerFormConsumer.get('phoneNumber')?.touched">
+              number must be numeric.
+        </span>
+          </div>
+
+
+          <div class="select-box-custom">
+            <label>Customer Type</label>
+            <select formControlName="customerType" class="custom" required>
+              <option hidden selected value="">Select Type</option>
+              <option value="VIP">VIP</option>
+              <option value="Normal">NORMAL</option>
+            </select>
+            <small *ngIf="registerFormConsumer.get('customerType')?.invalid && registerFormConsumer.get('customerType')?.touched"
+                   class="error-message">
+              Please select a customer type.
+            </small>
+          </div>
+        </div>
+
+        <div class="input-box address">
+          <label>NIC</label>
+          <input type="text" formControlName="nic" placeholder="National identity number" required/>
+          <small *ngIf="registerFormConsumer.get('nic')?.invalid && registerFormConsumer.get('nic')?.touched" class="error-message">
+            NIC is required and must be at least 10 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Password</label>
+          <input type="password" formControlName="password" placeholder="Add more than six digits" required/>
+          <small *ngIf="registerFormConsumer.get('password')?.invalid && registerFormConsumer.get('password')?.touched"
+                 class="error-message">
+            Password must be at least 6 characters long.
+          </small>
+
+          <br>
+          <label>Re-enter Password</label>
+          <input type="password" formControlName="confirmPassword" placeholder="Re-enter the password" required/>
+          <small *ngIf="!passwordsMatch() && registerFormConsumer.get('confirmPassword')?.touched" class="error-message">
+            Passwords do not match.
+          </small>
+        </div>
+
+        <button type="submit" [disabled]="registerFormConsumer.invalid">Submit</button>
+      </form>
+    </section>
+  </mat-tab>
+  <mat-tab label="Vendor Registration">
+
+
+    <section class="container">
+      <header>Vendor Registration Form</header>
+      <form [formGroup]="registerFormVendor" (ngSubmit)="onVendorSubmit()" class="form">
+        <div class="input-box">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" placeholder="Enter first name" required/>
+          <small *ngIf="registerFormVendor.get('firstName')?.invalid && registerFormVendor.get('firstName')?.touched"
+                 class="error-message">
+            First name is required and must be at least 2 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" placeholder="Enter last name" required/>
+          <small *ngIf="registerFormVendor.get('lastName')?.invalid && registerFormVendor.get('lastName')?.touched"
+                 class="error-message">
+            Last name is required and must be at least 2 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="Enter email address" required/>
+          <small *ngIf="registerFormVendor.get('email')?.invalid && registerFormVendor.get('email')?.touched" class="error-message">
+            Please enter a valid email address.
+          </small>
+        </div>
+
+        <div class="type">
+          <div class="input-box">
+            <label>Phone Number</label>
+            <input type="text" formControlName="phoneNumber" placeholder="Enter your number" required/>
+            <span class="error-message"
+                  *ngIf="registerFormConsumer.get('phoneNumber')?.invalid && registerFormConsumer.get('phoneNumber')?.touched">
+              Number must be numeric.
+            </span>
+          </div>
+
+          <div class="input-box">
+            <label>Company ID</label>
+            <input type="text" formControlName="companyId" placeholder="Enter company ID" />
+            <span class="error-message"
+                  *ngIf="registerFormConsumer.get('companyId')?.invalid && registerFormConsumer.get('companyId')?.touched">
+              Company ID must be in the format 'CG\\d+'.
+            </span>
+          </div>
+        </div>
+
+        <div class="input-box address">
+          <label>NIC</label>
+          <input type="text" formControlName="nic" placeholder="National identity number" required/>
+          <small *ngIf="registerFormVendor.get('nic')?.invalid && registerFormVendor.get('nic')?.touched" class="error-message">
+            NIC is required and must be at least 10 characters.
+          </small>
+        </div>
+
+        <div class="input-box">
+          <label>Password</label>
+          <input type="password" formControlName="password" placeholder="Add more than six digits" required/>
+          <small *ngIf="registerFormVendor.get('password')?.invalid && registerFormVendor.get('password')?.touched"
+                 class="error-message">
+            Password must be at least 6 characters long.
+          </small>
+
+          <br>
+          <label>Re-enter Password</label>
+          <input type="password" formControlName="confirmPassword" placeholder="Re-enter the password" required/>
+          <small *ngIf="!passwordsMatch() && registerFormVendor.get('confirmPassword')?.touched" class="error-message">
+            Passwords do not match.
+          </small>
+        </div>
+
+        <button type="submit" [disabled]="registerFormVendor.invalid">Submit</button>
+      </form>
+    </section>
+  </mat-tab>
+</mat-tab-group>
