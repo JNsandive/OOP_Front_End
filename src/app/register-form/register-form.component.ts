@@ -15,7 +15,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class RegisterFormComponent {
   registerFormConsumer: FormGroup;
   registerFormVendor: FormGroup;
-  private message: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, // Inject Router
   ) {
