@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-customer-navbar',
@@ -7,7 +9,8 @@ import {MatIcon} from '@angular/material/icon';
   styleUrls: ['./customer-navbar.component.css'],
   standalone: true,
   imports: [
-    MatIcon
+    MatIcon,
+    RouterLink
   ]
 })
 export class CustomerNavbarComponent {

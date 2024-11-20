@@ -1,0 +1,108 @@
+<app-customer-navbar></app-customer-navbar>
+<div class="container">
+  <h2>Update Customer Details</h2>
+
+  <mat-card *ngIf="!isLoading; else loading">
+    <form [formGroup]="customerForm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" placeholder="Enter first name" />
+        <mat-error *ngIf="customerForm.get('firstName')?.hasError('required')">
+          First Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Enter last name" />
+        <mat-error *ngIf="customerForm.get('lastName')?.hasError('required')">
+          Last Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter email" />
+        <mat-error *ngIf="customerForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="customerForm.get('email')?.hasError('email')">
+          Please enter a valid email
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Phone Number -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber" placeholder="Enter phone number" />
+        <mat-error *ngIf="customerForm.get('phoneNumber')?.hasError('required')">
+          Phone Number is required
+        </mat-error>
+        <mat-error *ngIf="customerForm.get('phoneNumber')?.hasError('pattern')">
+          Phone Number must be exactly 10 digits
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Customer Type and NIC -->
+      <div class="dropdown-container" [class.expand-nic]="isDropdownOpen">
+        <!-- Customer Type -->
+        <div class="dropdown">
+          <mat-form-field appearance="fill">
+            <mat-label>Customer Type*</mat-label>
+            <mat-select
+              formControlName="customerType"
+              required
+              (openedChange)="toggleDropdown($event)">
+              <mat-option value="VIP">VIP</mat-option>
+              <mat-option value="Normal">NORMAL</mat-option>
+            </mat-select>
+            <mat-error *ngIf="customerForm.get('customerType')?.hasError('required')">
+              Customer Type is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- NIC Field -->
+        <div class="nic-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>NIC</mat-label>
+            <input matInput formControlName="NIC" placeholder="Enter NIC" />
+            <mat-error *ngIf="customerForm.get('NIC')?.hasError('required')">
+              NIC is required
+            </mat-error>
+            <mat-error *ngIf="customerForm.get('NIC')?.hasError('minlength')">
+              NIC must be at least 10 characters
+            </mat-error>
+            <mat-error *ngIf="customerForm.get('NIC')?.hasError('maxlength')">
+              NIC must not exceed 15 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button class="custom-button" type="button" (click)="openModal()" [disabled]="customerForm.invalid">
+          Update
+        </button>
+      </div>
+
+    </form>
+
+
+  </mat-card>
+  <!-- Confirmation Modal -->
+  <div class="modal" [class.show]="isModalVisible">
+    <div class="modal-content">
+      <p>Are you sure you want to update the customer details?</p>
+      <button class="custom-button-mt" (click)="submitForm()">Yes</button>
+      <button class="custom-button-mt cancel-button" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+  <ng-template #loading>
+    <p>Loading customer details...</p>
+  </ng-template>
+</div>

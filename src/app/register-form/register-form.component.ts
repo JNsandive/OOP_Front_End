@@ -22,9 +22,9 @@ export class RegisterFormComponent {
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       customerType: ['', Validators.required],
-      nic: ['', [Validators.required, Validators.minLength(10)]],
+      nic: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(14)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     });

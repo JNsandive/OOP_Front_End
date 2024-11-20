@@ -38,8 +38,8 @@ li a:hover {
   flex-grow: 1;
 }
 .icon-right {
-  margin-left: 84%; /* Moves the icon to the far right */
-  margin-top: 10px;
+  margin-left: 83%;
+  margin-top: -4px;
   display: flex;
   align-items: center;
 }
