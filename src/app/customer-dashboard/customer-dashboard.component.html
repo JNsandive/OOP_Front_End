@@ -1,30 +1,19 @@
 <body>
-<ul class="nav-bar">
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-  <li class="icon-right">
-    <mat-icon class="custom-icon" style="color: white;">settings</mat-icon>
-  </li>
-</ul>
+<app-customer-navbar></app-customer-navbar>
+
+
 
 <div class="main-content">
   <div class="fixed-buy-section">
-    <p class="buy-text">Buy your tickets the way that you need!</p>
+    <p class="buy-text">Buy your tickets!</p>
     <button (click)="buyTickets()" [disabled]="selectedTicketIds.length === 0" class="buy-button">
       Buy Selected Tickets
     </button>
   </div>
 
-  <div class="ticket-container">
-    <div *ngFor="let ticket of tickets"
-         class="ticket-card"
-         [ngClass]="{
-             'available': ticket.available && !ticket.selected,
-             'unavailable': !ticket.available,
-             'selected': ticket.selected
-           }"
+  <div *ngIf="tickets.length > 0; else noTickets" class="ticket-container">
+    <div *ngFor="let ticket of tickets" class="ticket-card"
+         [ngClass]="{ 'available': ticket.available && !ticket.selected, 'unavailable': !ticket.available, 'selected': ticket.selected }"
          (click)="selectTicket(ticket)"
          [style.pointerEvents]="!ticket.available ? 'none' : 'auto'">
       <p>{{ ticket.name }}</p>
@@ -34,5 +23,12 @@
       <p *ngIf="!ticket.available" class="status">Unavailable</p>
     </div>
   </div>
+
+  <!-- Template for no tickets -->
+  <ng-template #noTickets>
+    <div class="no-tickets-msg">
+      <p>No tickets available at the moment</p>
+    </div>
+  </ng-template>
 </div>
 </body>

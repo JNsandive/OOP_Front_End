@@ -1,0 +1,49 @@
+<app-customer-navbar></app-customer-navbar>
+
+
+<div class="main-content">
+  <div class="header-section">
+    <h1>Your Ticket Activity</h1>
+    <p>Below is the record of tickets you have purchased. Use the table to review your activities.</p>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Number Column -->
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef>No</th>
+      <td mat-cell *matCellDef="let ticket; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.action }}</td>
+    </ng-container>
+
+    <!-- Performed By Column -->
+    <ng-container matColumnDef="performedBy">
+      <th mat-header-cell *matHeaderCellDef>Performed By</th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.performedBy }}</td>
+    </ng-container>
+
+    <!-- Ticket ID Column -->
+    <ng-container matColumnDef="ticketId">
+      <th mat-header-cell *matHeaderCellDef>Ticket ID</th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.ticketId }}</td>
+    </ng-container>
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+      <td mat-cell *matCellDef="let ticket">{{ ticket.timestamp | date: 'short' }}</td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <div class="paginator-section">
+    <mat-paginator [pageSize]="12" [pageSizeOptions]="[12]"  showFirstLastButtons></mat-paginator>
+  </div>
+</div>

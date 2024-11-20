@@ -5,54 +5,12 @@ body {
   overflow: hidden;
 }
 .main-content {
-  margin-top: 60px; /* Add margin to push content below the fixed navbar */
-  padding: 20px;
+  margin-top: 30px; /* Add margin to push content below the fixed navbar */
+  padding-top: 18px;
   height: calc(100vh - 60px); /* Set the height so that it fills the viewport minus the navbar height */
   overflow-y: auto; /* Enable scrolling within the main content */
 }
 
-.nav-bar{
-  width: 100%; /* Full width */
-  position: fixed;
-  top: 0; /* Position at the top */
-
-  z-index: 1000; /* Ensure it stays above other content */
-  /* Fix the navbar to the top */
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-.icon-right {
-  margin-left: 81%; /* Moves the icon to the far right */
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.custom-icon{
-  font-size: 26px;
-}
 
 .active{
   margin-left: 10px;
@@ -112,7 +70,7 @@ li a:hover {
 
 .buy-text {
   font-size: 18px;
-  margin-left: 20%;
+  margin-left: 24%;
 }
 
 .buy-button {
@@ -123,7 +81,7 @@ li a:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 30%;
+  margin-left: 34%;
   transition: background-color 0.3s;
 }
 
@@ -134,4 +92,11 @@ li a:hover {
 
 .buy-button:hover:not(:disabled) {
   background-color: #313434;
+}
+
+.no-tickets-msg {
+  text-align: center;
+  font-size: 20px;
+  color: #555; /* Subtle color for the message */
+  margin-top: 50px;
 }
