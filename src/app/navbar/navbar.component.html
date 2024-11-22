@@ -1,13 +1,14 @@
 <ul class="nav-bar">
-  <li><a class="active" href="/customer-dashboard">Home</a></li>
-  <li><a href="/purchased-tickets">Tickets</a></li>
+  <li><a (click)="onHomeClick()">Home</a></li>
+  <li><a (click)="onActivityClick()">Activity</a></li>
 
   <!-- Spacer to push the login button to the right -->
   <li class="spacer"></li>
 
-  <li class="login"><a href="/login">Login</a></li>
+
+  <li class="log-out"><a (click)="onLogoutClick()">Log Out</a></li>
   <li class="icon-right">
-    <a [routerLink]="'/edit-customer'">
+    <a (click)="onProfileClick()">
       <mat-icon class="custom-icon" style="color: white;">settings</mat-icon>
     </a>
   </li>

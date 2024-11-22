@@ -1,10 +1,11 @@
-<app-customer-navbar></app-customer-navbar>
+<app-navbar></app-navbar>
 
 
 <div class="main-content">
+  <!-- Header Section -->
   <div class="header-section">
-    <h1>Your Ticket Activity</h1>
-    <p>Below is the record of tickets you have purchased. Use the table to review your activities.</p>
+    <h1>{{ headerTitle }}</h1>
+    <p>{{ headerSubtitle }}</p>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Number Column -->

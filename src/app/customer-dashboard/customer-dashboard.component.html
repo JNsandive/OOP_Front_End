@@ -1,6 +1,5 @@
 <body>
-<app-customer-navbar></app-customer-navbar>
-
+<app-navbar></app-navbar>
 
 
 <div class="main-content">
@@ -11,13 +10,24 @@
     </button>
   </div>
 
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="50"
+      color="primary">
+    </mat-progress-spinner>
+    <p>Processing your request, please wait...</p>
+  </div>
+
   <div *ngIf="tickets.length > 0; else noTickets" class="ticket-container">
     <div *ngFor="let ticket of tickets" class="ticket-card"
          [ngClass]="{ 'available': ticket.available && !ticket.selected, 'unavailable': !ticket.available, 'selected': ticket.selected }"
          (click)="selectTicket(ticket)"
          [style.pointerEvents]="!ticket.available ? 'none' : 'auto'">
       <p>{{ ticket.name }}</p>
-      <p>{{ ticket.price | currency }}</p>
+      <p>Price: {{ ticket.price | currency }}</p>
       <p *ngIf="ticket.available && !ticket.selected" class="status">Available</p>
       <p *ngIf="ticket.selected" class="status">Selected</p>
       <p *ngIf="!ticket.available" class="status">Unavailable</p>

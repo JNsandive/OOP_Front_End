@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterFormComponent} from './register-form/register-form.component';
 import {CustomerDashboardComponent} from './customer-dashboard/customer-dashboard.component';
-import {PurchasedTicketsComponent} from './purchased-tickets/purchased-tickets.component';
+import {TicketActivityComponent} from './ticket-activity/ticket-activity.component';
 import {VendorDashboardComponent} from './vendor-dashboard/vendor-dashboard.component'; // Import the new home component
 import { AuthGuard } from './guards/auth.guard';
 import {EditCustomerComponent} from './edit-customer/edit-customer.component'; // Custom route guard
@@ -23,10 +23,10 @@ import {EditCustomerComponent} from './edit-customer/edit-customer.component'; /
 export const routes: Routes = [
   { path: 'customer-dashboard', component: CustomerDashboardComponent, canActivate: [AuthGuard], data: { role: 'CONSUMER', animation: 'CustomerDashboard' } },
   { path: 'vendor-dashboard', component: VendorDashboardComponent, canActivate: [AuthGuard], data: { role: 'VENDOR', animation: 'VendorDashboard' } },
-  {path:'purchased-tickets',component:PurchasedTicketsComponent, canActivate: [AuthGuard], data: { role: 'CONSUMER', animation: 'PurchasedTickets' }},
+  { path: 'ticket-activity', component: TicketActivityComponent, canActivate: [AuthGuard], data: { roles: ['CONSUMER', 'VENDOR'], animation: 'PurchasedTickets' } },
   {path:'edit-customer',component:EditCustomerComponent, canActivate: [AuthGuard], data: { role: 'CONSUMER', animation: 'EditCustomer' }},
   { path: '', component: HomeComponent, data: { animation: 'HomePage' } }, // Home component for root path
-  { path: 'ticket-sales', component: TicketSalesLineChartComponent, data: { animation: 'TicketSales' } },
+  { path: 'ticket-sales', component: TicketSalesLineChartComponent, canActivate: [AuthGuard],data: { role:'VENDOR',animation: 'TicketSales' } },
   { path: 'login', component: LoginComponent, data: { animation: 'LoginPage' } },
   { path: 'registration', component: RegisterFormComponent, data: { animation: 'RegistrationPage' } },
   { path: '**', redirectTo: '', data: { animation: 'NotFound' } } // Redirect unknown paths to the home page

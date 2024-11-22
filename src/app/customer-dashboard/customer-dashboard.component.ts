@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {CommonModule, NgClass} from '@angular/common';
-import { CustomerNavbarComponent } from '../customer-navbar/customer-navbar.component'; // Adjust path if necessary
+import { NavbarComponent } from '../navbar/navbar.component'; // Adjust path if necessary
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -11,7 +12,7 @@ import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
     MatIcon,
     NgClass,
     CommonModule,
-    HttpClientModule,CustomerNavbarComponent
+    HttpClientModule, NavbarComponent, MatProgressSpinner
 
   ],
   templateUrl: './customer-dashboard.component.html',
@@ -21,6 +22,7 @@ export class CustomerDashboardComponent implements OnInit {
   tickets: any[] = [
     ];
 
+  isLoading: boolean = false; // Initialize loading state
 
   constructor(private http: HttpClient) {
   }
@@ -29,6 +31,7 @@ export class CustomerDashboardComponent implements OnInit {
     this.http.get<any[]>('http://localhost:8080/api/v1/tickets/list').subscribe(
       (data) => {
         this.tickets = data;
+        console.log('Tickets fetched:', this.tickets);
       },
       (error) => {
         console.error('Error fetching tickets:', error);
@@ -55,22 +58,27 @@ export class CustomerDashboardComponent implements OnInit {
     // Initialize headers with JWT
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+      'Authorization': 'Bearer ' + localStorage.getItem('jwtToken'),
     });
+
+    // Set loading state
+    this.isLoading = true;
 
     // Send POST request to buy tickets with selected ticket IDs and JWT
     this.http.post('http://localhost:8080/api/v1/tickets/purchase', this.selectedTicketIds, { headers }).subscribe(
       (response) => {
         console.log('Tickets bought successfully:', response);
         alert('Tickets bought successfully');
-        // reload the page
-        window.location.reload();
+        window.location.reload(); // Reload the page to reflect the changes
+        this.isLoading = false; // Reset loading state
       },
       (error) => {
         console.error('Error buying tickets:', error);
         alert('Error buying tickets');
+        this.isLoading = false; // Reset loading state
       }
     );
   }
+
 }
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerNavbarComponent} from '../customer-navbar/customer-navbar.component';
+import {NavbarComponent} from '../navbar/navbar.component';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatCard} from '@angular/material/card';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -13,7 +13,7 @@ import {MatButton} from '@angular/material/button';
   selector: 'app-edit-customer',
   standalone: true,
   imports: [
-    CustomerNavbarComponent,
+    NavbarComponent,
     MatError,
     MatLabel,
     MatFormField,
@@ -50,6 +50,7 @@ export class EditCustomerComponent implements OnInit {
   toggleDropdown(isOpen: boolean): void {
     this.isDropdownOpen = isOpen;
   }
+
   constructor(private fb: FormBuilder, private http: HttpClient) {
     // Initialize headers in the constructor
     this.headers = new HttpHeaders({
@@ -67,7 +68,7 @@ export class EditCustomerComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       type: ['', Validators.required],
-      NIC: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(12)]],
+      NIC: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
       customerType: ['', Validators.required],
     });
 
@@ -80,12 +81,16 @@ export class EditCustomerComponent implements OnInit {
       return;
     }
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+    });
     // Fetch customer details and populate the form
     const apiUrl = `${this.apiUrlBase}/${userId}`; // Construct the URL with path parameter
 
     console.log(apiUrl);
 
-    this.http.get<any>(apiUrl, { headers: this.headers }).subscribe({
+    this.http.get<any>(apiUrl,{headers}).subscribe({
       next: (response) => {
         this.customerForm.patchValue(response); // Populate the form with API data
         this.isLoading = false;
@@ -126,7 +131,7 @@ export class EditCustomerComponent implements OnInit {
 
       const apiUrl = `${this.apiUrlBase}/${userId}`; //
 
-      this.http.put(apiUrl, formData, { headers }).subscribe({
+      this.http.put(apiUrl, formData, {headers}).subscribe({
         next: (response) => {
           window.location.reload();
         },
@@ -160,4 +165,5 @@ export class EditCustomerComponent implements OnInit {
       alert('Error: Unable to decode authentication token');
       return null;
     }
-  }}
+  }
+}

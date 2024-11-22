@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { TicketSalesLineChartComponent } from './ticket-sales-line-chart/ticket-sales-line-chart.component';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
@@ -25,10 +25,14 @@ import { trigger, transition, style, animate, query, group } from '@angular/anim
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'frontEndOOP';
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  ngOnInit(): void {
+    // localStorage.clear();
   }
 }

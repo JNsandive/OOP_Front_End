@@ -12,9 +12,9 @@ export class AuthGuard implements CanActivate {
     const userRole = localStorage.getItem('userRole'); // Assume this is set during login/authentication
 
     if (token) {
-      // Check if the user role matches the required role for the route
-      const requiredRole = route.data['role'];
-      if (userRole === requiredRole) {
+      // Check if the user role matches any of the required roles for the route
+      const requiredRoles = route.data['roles'] as Array<string>;
+      if (requiredRoles && userRole && requiredRoles.includes(userRole)) {
         return true;
       } else {
         alert('You do not have permission to view this page');

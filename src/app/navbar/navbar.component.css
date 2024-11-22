@@ -38,12 +38,16 @@ li a:hover {
   flex-grow: 1;
 }
 .icon-right {
-  margin-left: 83%;
-  margin-top: -4px;
+  margin-left:1px;
+  margin-top: -3px;
   display: flex;
   align-items: center;
 }
 
 .custom-icon{
   font-size: 26px;
+}
+
+.log-out{
+  margin-left: 82%;
 }

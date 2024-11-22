@@ -2,33 +2,50 @@ import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { CustomerNavbarComponent } from '../customer-navbar/customer-navbar.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-purchased-tickets',
+  selector: 'app-ticket-activity',
   standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    CustomerNavbarComponent,
+    NavbarComponent,
     HttpClientModule,
   ],
-  templateUrl: './purchased-tickets.component.html',
-  styleUrls: ['./purchased-tickets.component.css'],
+  templateUrl: './ticket-activity.component.html',
+  styleUrls: ['./ticket-activity.component.css'],
 })
-export class PurchasedTicketsComponent implements AfterViewInit, OnInit {
+export class TicketActivityComponent implements AfterViewInit, OnInit {
   tickets: any[] = [];
   displayedColumns: string[] = ['number', 'action', 'performedBy', 'ticketId', 'timestamp'];
   dataSource = new MatTableDataSource(this.tickets);
   totalItems = 0;
+  headerTitle: string = '';
+  headerSubtitle: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    const role = localStorage.getItem('userRole');
+    console.log('User role:', role); // Log the user role for debugging
+
+    if (role === 'CONSUMER') {
+      this.headerTitle = 'Tickets You Have Purchased';
+      this.headerSubtitle = 'Below is the record of tickets you have purchased.';
+    } else if (role === 'VENDOR') {
+      this.headerTitle = 'Tickets You Have Added';
+      this.headerSubtitle = 'Below is the record of tickets you have added.';
+    } else {
+      console.error('Unknown user role:', role); // Log an error if the role is unknown
+      alert('Error: Unknown user role');
+      return;
+    }
+
     this.fetchPurchasedTickets(0, 12); // Initial fetch with default pagination values
   }
 
@@ -45,6 +62,7 @@ export class PurchasedTicketsComponent implements AfterViewInit, OnInit {
   fetchPurchasedTickets(pageIndex: number, pageSize: number): void {
     const apiUrl = 'http://localhost:8080/api/v1/activityLogs';
     const userId = this.getUserIdFromToken();
+    console.log('User ID:', userId);
 
     if (!userId) {
       alert('Error: Unable to fetch user ID from token');
@@ -59,6 +77,7 @@ export class PurchasedTicketsComponent implements AfterViewInit, OnInit {
 
     this.http.get<any>(apiUrl, { params }).subscribe({
       next: (response) => {
+        console.log('Fetched purchased tickets:', response);
         // Map response content to include sequential numbering
         this.tickets = response.content.map((ticket: any, index: number) => ({
           number: index + 1 + pageIndex * pageSize, // Calculate row numbers correctly
@@ -66,6 +85,7 @@ export class PurchasedTicketsComponent implements AfterViewInit, OnInit {
         }));
         this.dataSource.data = this.tickets; // Update dataSource
         this.totalItems = response.totalElements; // Update total items for pagination
+        console.log('Fetched purchased tickets:', response.totalElements);
         this.paginator.length = this.totalItems; // Set total items in paginator
         console.log('Fetched purchased tickets:', this.tickets);
         console.log('Total purchased tickets:', this.totalItems);
