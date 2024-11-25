@@ -1,4 +1,12 @@
-
-<div>
-  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+<app-navbar></app-navbar>
+<div class="chart-container">
+  <h2>Sales Statistics</h2>
+  <p class="chart-description">The chart below displays the latest ticket sales performance over the past week.</p>
+  <div class="chart">
+    <canvasjs-chart
+      [options]="chartOptions"
+      [styles]="{ width: '100%', height: '670px' }"
+      (chartInstance)="getChartInstance($event)">
+    </canvasjs-chart>
+  </div>
 </div>

@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="control-panel">
+  <button class="control-button start-button" (click)="onStart()">Start</button>
+  <button class="control-button pause-button" (click)="onPause()">Pause</button>
+  <button class="control-button resume-button" (click)="onResume()">Resume</button>
+</div>
+
+<div class="activity-table">
+  <h2>Current Activities</h2>
+
+  <!-- Scrollable Table Container -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Activity Column -->
+      <ng-container matColumnDef="activity">
+        <th mat-header-cell *matHeaderCellDef>Activity</th>
+        <td mat-cell *matCellDef="let element">{{ element.activity }}</td>
+      </ng-container>
+
+      <!-- Ticket Count Column -->
+      <ng-container matColumnDef="ticketCount">
+        <th mat-header-cell *matHeaderCellDef>Ticket Count</th>
+        <td mat-cell *matCellDef="let element">{{ element.ticketCount }}</td>
+      </ng-container>
+
+      <!-- User Name Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef>User Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+      </ng-container>
+
+      <!-- Time Column -->
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Time</th>
+        <td mat-cell *matCellDef="let element">{{ element.time | date: 'short' }}</td>
+      </ng-container>
+
+      <!-- Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- No Data Template -->
+  <ng-template #noData>
+    <div class="no-data-message">
+      <p>No activities are currently in progress.</p>
+    </div>
+  </ng-template>
+</div>

@@ -4,12 +4,13 @@ import { RouterOutlet } from '@angular/router';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {NavbarComponent} from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-ticket-sales-line-chart',
   standalone: true,
   imports: [
-    RouterOutlet, CommonModule, RouterOutlet, HttpClientModule, CanvasJSAngularChartsModule,TicketSalesLineChartComponent,
+    RouterOutlet, CommonModule, RouterOutlet, HttpClientModule, CanvasJSAngularChartsModule, TicketSalesLineChartComponent, NavbarComponent,
   ],
   templateUrl: './ticket-sales-line-chart.component.html',
   styleUrl: './ticket-sales-line-chart.component.css'

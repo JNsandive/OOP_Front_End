@@ -1,0 +1,29 @@
+/* General container styling */
+.chart-container {
+  max-width: 100%;
+  margin: 20px auto; /* Center the container */
+  padding: 20px;
+  background: #f9f9f9; /* Light background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center;
+}
+
+/* Title styling */
+.chart-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333; /* Darker text for better visibility */
+}
+
+/* Description styling */
+.chart-description {
+  font-size: 16px;
+  margin-bottom: 41px;
+  color: #666; /* Subtle text for a cleaner look */
+}
+
+/* Chart area styling */
+.chart {
+  margin: 0 auto; /* Center the chart */
+}

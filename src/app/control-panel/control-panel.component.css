@@ -1,0 +1,105 @@
+/* Control panel container */
+.table-container {
+  max-height: 535px; /* Set a fixed height for the table */
+  overflow-y: auto; /* Add vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrolling */
+  padding-right: 10px; /* Optional: Add padding for scrollbar */
+}
+
+.control-panel {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between buttons */
+  margin: 80px auto;
+  padding: 20px;
+  background-color: #f5f5f5; /* Light background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 600px;
+}
+
+/* General button styling */
+.control-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+/* Start button */
+.start-button {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.start-button:hover {
+  background-color: #45a049;
+}
+
+/* Pause button */
+.pause-button {
+  background-color: #ff9800; /* Orange */
+  color: white;
+}
+
+.pause-button:hover {
+  background-color: #fb8c00;
+}
+
+/* Resume button */
+.resume-button {
+  background-color: #2196f3; /* Blue */
+  color: white;
+}
+
+.resume-button:hover {
+  background-color: #1e88e5;
+}
+
+/* Disabled state for buttons */
+.control-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.activity-table {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 800px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-table h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mat-header-row,
+.mat-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.no-data-message {
+  text-align: center;
+  color: #555;
+  font-size: 18px;
+  padding: 20px;
+}
+
+
+/* Center-align text in table cells */
+.mat-mdc-cell{
+  text-align: center;
+}
+
+.mat-mdc-header-cell{
+  text-align: center;
+}

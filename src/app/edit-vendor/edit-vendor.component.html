@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <h2>Update Vendor Details</h2>
+  <mat-card *ngIf="!isLoading; else loading">
+    <form [formGroup]="vendorForm">
+      <!-- First Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName"/>
+        <mat-error *ngIf="vendorForm.get('firstName')?.hasError('required')">
+          First Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName"/>
+        <mat-error *ngIf="vendorForm.get('lastName')?.hasError('required')">
+          Last Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email"/>
+        <mat-error *ngIf="vendorForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="vendorForm.get('email')?.hasError('email')">
+          Enter a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Phone Number -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber"/>
+        <mat-error *ngIf="vendorForm.get('phoneNumber')?.hasError('required')">
+          Phone Number is required
+        </mat-error>
+        <mat-error *ngIf="vendorForm.get('phoneNumber')?.hasError('pattern')">
+          Enter a valid 10-digit phone number
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Company ID -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Company ID</mat-label>
+        <input matInput formControlName="companyId"/>
+        <mat-error *ngIf="vendorForm.get('companyId')?.hasError('required')">
+          Company ID is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- NIC -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>NIC</mat-label>
+        <input matInput formControlName="NIC"/>
+        <mat-error *ngIf="vendorForm.get('NIC')?.hasError('required')">
+          NIC is required
+        </mat-error>
+        <mat-error *ngIf="vendorForm.get('NIC')?.hasError('minlength')">
+          NIC must be at least 10 characters
+        </mat-error>
+        <mat-error *ngIf="vendorForm.get('NIC')?.hasError('maxlength')">
+          NIC must be at most 15 characters
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button class="custom-button" type="button" (click)="openModal()" [disabled]="vendorForm.invalid">
+          Update
+        </button>
+      </div>
+
+    </form>
+
+
+    <!-- Confirmation Modal -->
+    <div class="modal" [class.show]="isModalVisible">
+      <div class="modal-content">
+        <p>Are you sure you want to update the customer details?</p>
+        <button class="custom-button-mt" (click)="submitForm()">Yes</button>
+        <button class="custom-button-mt cancel-button" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <ng-template #loading>
+    <p>Loading vendor details...</p>
+  </ng-template>
+</div>

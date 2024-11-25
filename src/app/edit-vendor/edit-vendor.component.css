@@ -1,0 +1,123 @@
+.container {
+  display: flex; /* Enables Flexbox */
+  flex-direction: column; /* Align items vertically */
+  justify-content: center; /* Centers vertically */
+  align-items: center; /* Centers horizontally */
+  height: 88.5vh; /* Full viewport height */
+  max-width: 600px;
+  margin: 3%  auto; /* Horizontally centers the container */
+  padding: 20px;
+  box-shadow:0px 0px 18px 8px rgba(0, 0, 0, 0.1); /* Optional: For a card effect */
+  border-radius: 8px; /* Optional: For rounded corners */
+  background: #fff; /* Optional: Background color */
+}
+
+.full-width {
+  width: 100%;
+}
+
+h2{
+  margin-bottom: 75px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 65px;
+}
+.custom-button {
+  background-color: #292b38; /* Primary color */
+  color: white; /* Text color */
+  border: 2px solid black; /* Black border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px; /* Padding around the button text */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor for better UX */
+  transition: all 0.3s ease; /* Smooth hover effect */
+  width: 50%;
+}
+
+.custom-button-mt{
+  background-color: #292b38; /* Primary color */
+  color: white; /* Text color */
+  border: 2px solid black; /* Black border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px; /* Padding around the button text */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor for better UX */
+  transition: all 0.3s ease; /* Smooth hover effect */
+  width: 30%;
+}
+.custom-button:hover {
+  background-color: white; /* Background color on hover */
+  color: #1e2333; /* Text color on hover */
+  border-color: #202434; /* Border color on hover */
+}
+
+.custom-button:disabled {
+  background-color: #cccccc; /* Disabled background color */
+  color: #666666; /* Disabled text color */
+  border-color: #aaaaaa; /* Disabled border color */
+  cursor: not-allowed; /* Disabled cursor */
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+}
+
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.cancel-button {
+  background: #ccc;
+  color: #333;
+  margin-left: 10px;
+}
+
+
+/* Styling for mat-error messages */
+mat-error {
+  color: red !important; /* Explicitly set the error text color to red */
+  font-weight: bold; /* Optional: Make the error message bold */
+  font-size: 14px; /* Optional: Adjust the font size */
+  margin-top: 5px; /* Optional: Add spacing between input and error message */
+}
+
+/* Ensure consistent spacing for error messages */
+.mat-form-field {
+  margin-bottom: 16px; /* Ensure consistent spacing between fields */
+}
+
+/* Optional: Add custom focus styles for invalid input fields */
+.mat-form-field.mat-form-field-invalid .mat-input-element {
+  border-color: red !important; /* Red border for invalid fields */
+  box-shadow: 0 0 5px red; /* Optional: Add a glowing effect */
+}
+
+/* Optional: Adjust label styles for invalid fields */
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: red !important; /* Red label for invalid fields */
+}
